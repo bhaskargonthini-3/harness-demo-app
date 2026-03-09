@@ -1,0 +1,33 @@
+pipeline:
+  name: Build harness-demo-app
+  identifier: Build_bhaskargonthini_3_harness_demo_app_1773035120983
+  projectIdentifier: harnessdemoproject
+  orgIdentifier: default
+  stages:
+    - stage:
+        name: Build
+        identifier: Build
+        type: CI
+        spec:
+          cloneCodebase: true
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: Echo Welcome Message
+                  identifier: Echo_Welcome_Message
+                  spec:
+                    shell: Sh
+                    command: echo "Welcome to Harness CI"
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: account.Github_OAuth_1773034993233
+        repoName: bhaskargonthini-3/harness-demo-app
+        build: <+input>
