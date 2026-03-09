@@ -25,7 +25,7 @@ pipeline:
                   identifier: GitClone_1
                   spec:
                     connectorRef: account.Github_OAuth_1773034993233
-                    repoName: harness-demo-app
+                    repoName: bhaskargonthini-3/harness-demo-app
                     build:
                       type: branch
                       spec:
