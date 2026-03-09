@@ -1,0 +1,75 @@
+pipeline:
+  name: Build harness-demo-app
+  identifier: Build_bhaskargonthini_3_harness_demo_app_1773035120983
+  projectIdentifier: harnessdemoproject
+  orgIdentifier: default
+  stages:
+    - stage:
+        name: Build
+        identifier: Build
+        type: CI
+        spec:
+          cloneCodebase: true
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: Echo Welcome Message
+                  identifier: Echo_Welcome_Message
+                  spec:
+                    shell: Sh
+                    command: echo "Welcome to Harness CI"
+              - step:
+                  type: GitClone
+                  name: GitClone_1
+                  identifier: GitClone_1
+                  spec:
+                    connectorRef: account.Github_OAuth_1773034993233
+                    repoName: bhaskargonthini-3/harness-demo-app
+                    build:
+                      type: branch
+                      spec:
+                        branch: main
+              - step:
+                  type: Run
+                  name: build_docker_image
+                  identifier: build_docker_image
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: docker:24.0.7
+                    shell: Sh
+                    command: docker build -t bhaskargonthini33/harness-demo-app:${HARNESS_BUILD_ID} .
+                    privileged: true
+              - step:
+                  type: Run
+                  name: push_docker_image
+                  identifier: push_docker_image
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: docker:24.0.7
+                    shell: Sh
+                    command: |-
+                      echo "Password length: ${#DOCKER_PASSWORD}"
+                      echo $DOCKER_PASSWORD | docker login -u bhaskargonthini33 --password-stdin
+                      docker push bhaskargonthini33/harness-demo-app:${HARNESS_BUILD_ID}
+                    privileged: true
+                    envVariables:
+                      DOCKER_PASSWORD: <+secrets.getValue("Dockerhub_Token")>
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: MarkAsFailure
+  properties:
+    ci:
+      codebase:
+        connectorRef: account.Github_OAuth_1773034993233
+        repoName: bhaskargonthini-3/harness-demo-app
+        build: <+input>
