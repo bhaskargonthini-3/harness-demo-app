@@ -76,6 +76,17 @@ pipeline:
           deploymentType: Kubernetes
           service:
             serviceRef: harnessdemoservice
+            serviceInputs:
+              serviceDefinition:
+                type: Kubernetes
+                spec:
+                  artifacts:
+                    primary:
+                      sources:
+                        - identifier: dockerhubconnector
+                          type: DockerRegistry
+                          spec:
+                            tag: <+input>
           environment:
             environmentRef: Dev
             deployToAll: false
