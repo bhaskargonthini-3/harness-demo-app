@@ -82,8 +82,11 @@ pipeline:
                 spec:
                   artifacts:
                     primary:
-                      primaryArtifactRef: <+input>
-                      sources: <+input>
+                      sources:
+                        - identifier: Harness_Docker_Registry
+                          type: DockerRegistry
+                          spec:
+                            tagRegex: <+input>.regex(<+pipeline.sequenceId>)
           environment:
             environmentRef: Dev
             deployToAll: false
