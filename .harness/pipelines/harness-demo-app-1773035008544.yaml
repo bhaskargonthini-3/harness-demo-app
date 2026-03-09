@@ -49,9 +49,11 @@ pipeline:
                     image: docker:24.0.7
                     shell: Sh
                     command: |-
-                      docker login -u bhaskargonthini33 -p <+secrets.getValue("Dockerhub_Token")>
+                      echo $DOCKER_PASSWORD | docker login -u bhaskargonthini33 --password-stdin
                       docker push bhaskargonthini33/harness-demo-app:${HARNESS_BUILD_ID}
                     privileged: true
+                    envVariables:
+                      DOCKER_PASSWORD: <+secrets.getValue("Dockerhub_Token")>
           platform:
             os: Linux
             arch: Amd64
