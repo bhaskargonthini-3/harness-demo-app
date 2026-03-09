@@ -76,17 +76,6 @@ pipeline:
           deploymentType: Kubernetes
           service:
             serviceRef: harnessdemoservice
-            serviceInputs:
-              serviceDefinition:
-                type: Kubernetes
-                spec:
-                  artifacts:
-                    primary:
-                      sources:
-                        - identifier: Harness_Docker_Registry
-                          type: DockerRegistry
-                          spec:
-                            tagRegex: <+input>.regex(<+pipeline.sequenceId>)
           environment:
             environmentRef: Dev
             deployToAll: false
