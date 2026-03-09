@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_bhaskargonthini_3_harness_demo_app_1773035120983-push-trigger-input-set
+  identifier: Build_bhaskargonthini_3_harness_demo_app_1773035120983pushtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: harnessdemoproject
+  pipeline:
+    identifier: Build_bhaskargonthini_3_harness_demo_app_1773035120983
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
