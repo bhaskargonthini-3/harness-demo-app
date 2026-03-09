@@ -49,6 +49,7 @@ pipeline:
                     image: docker:24.0.7
                     shell: Sh
                     command: |-
+                      echo "Password length: ${#DOCKER_PASSWORD}"
                       echo $DOCKER_PASSWORD | docker login -u bhaskargonthini33 --password-stdin
                       docker push bhaskargonthini33/harness-demo-app:${HARNESS_BUILD_ID}
                     privileged: true
