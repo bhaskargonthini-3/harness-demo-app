@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_bhaskargonthini_3_harness_demo_app_1773035120983-pr-trigger-input-set
+  identifier: Build_bhaskargonthini_3_harness_demo_app_1773035120983prtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: harnessdemoproject
+  pipeline:
+    identifier: Build_bhaskargonthini_3_harness_demo_app_1773035120983
+    properties:
+      ci:
+        codebase:
+          build:
+            type: PR
+            spec:
+              number: <+trigger.prNumber>
