@@ -37,7 +37,7 @@ pipeline:
                   spec:
                     connectorRef: account.harnessImage
                     image: docker:24.0.7
-                    shell: Bash
+                    shell: Sh
                     command: docker build -t bhaskargonthini33/harness-demo-app:${HARNESS_BUILD_ID} .
                     privileged: true
               - step:
@@ -47,7 +47,7 @@ pipeline:
                   spec:
                     connectorRef: account.harnessImage
                     image: docker:24.0.7
-                    shell: Bash
+                    shell: Sh
                     command: |-
                       docker login -u bhaskargonthini33 -p <+secrets.getValue("Dockerhub_Token")>
                       docker pushbhaskargonthini33/harness-demo-app:${HARNESS_BUILD_ID}
