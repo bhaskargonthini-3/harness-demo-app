@@ -35,7 +35,7 @@ pipeline:
                   name: build_docker_image
                   identifier: build_docker_image
                   spec:
-                    connectorRef: dockerhubconnector
+                    connectorRef: account.harnessImage
                     image: docker:24.0.7
                     shell: Sh
                     command: docker build -t bhaskargonthini33/harness-demo-app:${HARNESS_BUILD_ID} .
