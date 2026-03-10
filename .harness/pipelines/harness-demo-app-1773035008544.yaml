@@ -49,9 +49,14 @@ pipeline:
                     image: docker:24.0.7
                     shell: Sh
                     command: |-
-                      echo "Password length: ${#DOCKER_PASSWORD}"
                       echo $DOCKER_PASSWORD | docker login -u bhaskargonthini33 --password-stdin
+
+
+                      docker tag bhaskargonthini33/harness-demo-app:${HARNESS_BUILD_ID} bhaskargonthini33/harness-demo-app:latest
+
                       docker push bhaskargonthini33/harness-demo-app:${HARNESS_BUILD_ID}
+
+                      docker push bhaskargonthini33/harness-demo-app:latest
                     privileged: true
                     envVariables:
                       DOCKER_PASSWORD: <+secrets.getValue("Dockerhub_Token")>
@@ -76,14 +81,6 @@ pipeline:
           deploymentType: Kubernetes
           service:
             serviceRef: harnessdemoservice
-            serviceInputs:
-              serviceDefinition:
-                type: Kubernetes
-                spec:
-                  artifacts:
-                    primary:
-                      primaryArtifactRef: <+input>
-                      sources: <+input>
           environment:
             environmentRef: Dev
             deployToAll: false
