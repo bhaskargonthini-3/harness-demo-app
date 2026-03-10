@@ -49,9 +49,14 @@ pipeline:
                     image: docker:24.0.7
                     shell: Sh
                     command: |-
+                      echo $DOCKER_PASSWORD | docker login -u bhaskargonthini33 --password-stdin
+
                       docker build -t bhaskargonthini33/harness-demo-app:${HARNESS_BUILD_ID} .
+
                       docker tag bhaskargonthini33/harness-demo-app:${HARNESS_BUILD_ID} bhaskargonthini33/harness-demo-app:latest
+
                       docker push bhaskargonthini33/harness-demo-app:${HARNESS_BUILD_ID}
+
                       docker push bhaskargonthini33/harness-demo-app:latest
                     privileged: true
                     envVariables:
