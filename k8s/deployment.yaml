@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: harness-demo
-        image: <+artifacts.primary.image>
+        image: bhaskargonthini33/harness-demo-app:latest
         ports:
         - containerPort: 80
