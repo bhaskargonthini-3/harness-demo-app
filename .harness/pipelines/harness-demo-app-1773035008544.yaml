@@ -86,7 +86,7 @@ pipeline:
                         - identifier: dockerhubconnector
                           type: DockerRegistry
                           spec:
-                            tagRegex: "<+input>.selectOneFrom(Tag Regex: .*)"
+                            tag: <+pipeline.sequenceId>
           environment:
             environmentRef: Dev
             deployToAll: false
